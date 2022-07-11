@@ -1,0 +1,164 @@
+{
+	"layout": {
+		"type": "layout",
+		"pages": [ "generic", "extra"],
+		"generic": {
+			"type": "page",
+			"title":  "Configuration",
+			"sections": ["drawing-section", "reset-section"]
+		},
+		"extra": {
+			"type": "page",
+			"title":  "Options",
+			"sections": ["appearance-section", "function-section"]
+		},
+		"drawing-section": {
+			"type": "section",
+			"title":  "Image drawing",
+			"keys":  [
+				"eyeline-width",
+				"relief-factor",
+				"relief-factor-bound",
+				"eyebrow-scale",
+				"iris-move",
+				"iris-size",
+				"iris-color"
+			]
+		},
+		"reset-section": {
+			"type": "section",
+			"title":  "Panic button",
+			"keys":  ["reset"]
+		},
+		"appearance-section": {
+			"type": "section",
+			"title":  "Appearance",
+			"keys":  ["custom-size", "icon-size"]
+		},
+		"function-section": {
+			"type": "section",
+			"title":  "Functions",
+			"keys":  ["is-enabled", "spooky", "expo-toggle", "ws-switch", "ws-tip"]
+		}
+	},
+	"eyeline-width": {
+		"type": "spinbutton",
+		"default": 1.5,
+		"min" : 1,
+		"max" : 2,
+		"units": "",
+		"step" : 0.05,
+		"description" : "Eye line width",
+		"tooltip" : ""
+	},
+	"relief-factor": {
+		"type": "spinbutton",
+		"default": 30,
+		"min" : 20,
+		"max" : 40,
+		"units": "",
+		"step" : 1,
+		"description" : "Relief factor",
+		"tooltip" : ""
+	},
+	"relief-factor-bound": {
+		"type": "spinbutton",
+		"default": 0.7,
+		"min" : 0.5,
+		"max" : 0.9,
+		"units": "",
+		"step" : 0.05,
+		"description" : "Relief factor boundary",
+		"tooltip" : ""
+	},
+	"eyebrow-scale": {
+		"type": "spinbutton",
+		"default": 1.4,
+		"min" : 1.30,
+		"max" : 1.45,
+		"units": "",
+		"step" : 0.05,
+		"description" : "Eyebrow scale",
+		"tooltip" : ""
+	},
+	"iris-move": {
+		"type": "spinbutton",
+		"default": 0.66,
+		"min" : 0.46,
+		"max" : 0.86,
+		"units": "",
+		"step" : 0.01,
+		"description" : "Iris move",
+		"tooltip" : ""
+	},
+	"iris-size": {
+		"type": "spinbutton",
+		"default": 0.5,
+		"min" : 0.20,
+		"max" : 0.60,
+		"units": "",
+		"step" : 0.05,
+		"description" : "Iris size",
+		"tooltip" : ""
+	},
+	"iris-color": {
+		"type": "colorchooser",
+		"default": "rgba(127 , 66 , 255 , 1.0)",
+		"description" : "Iris color",
+		"tooltip" : ""
+	},
+	"reset": {
+		"type": "button",
+		"callback": "_resetVal",
+		"description" : "Reset drawing values to default",
+		"tooltip" : "Use this button to reset all drawing values to their\ndefaults in case your custom values have gone too wrong"
+	},
+	"custom-size": {
+		"type": "switch",
+		"default": false,
+		"description" : "Override default height",
+		"tooltip" : "Use a custom height in large panels"
+	},
+	"icon-size": {
+		"type": "spinbutton",
+		"default": 16,
+		"min" : 12,
+		"max" : 48,
+		"units": "px",
+		"step" : 1,
+		"dependency": "custom-size",
+		"description" : "Custom height",
+		"tooltip" : ""
+	},
+	"is-enabled": {
+		"type": "switch",
+		"default": true,
+		"description" : "Enable eyes movement",
+		"tooltip" : ""
+	},
+	"spooky": {
+		"type": "switch",
+		"default": false,
+		"description" : "Enable spooky behavior",
+		"tooltip" : "Boo-hoo !"
+	},
+	"expo-toggle": {
+		"type": "switch",
+		"default": true,
+		"description" : "Prioritize Expo on click",
+		"tooltip" : "Default behavior is to show Overview on icon click;\nactivating this setting will show Expo instead.\nIn any case, Ctrl+click will always show the other option."
+	},
+	"ws-switch": {
+		"type": "switch",
+		"default": true,
+		"description" : "Switch workspaces",
+		"tooltip" : "Activating this setting will enable workspace switching\nthrough Ctrl + mouse wheel scroll up/down."
+	},
+	"ws-tip": {
+		"type": "switch",
+		"default": true,
+		"description" : "Show workspace in tooltip",
+		"dependency": "ws-switch",
+		"tooltip" : "Activating this setting will enable displaying current\nworkspace name and index in the applet tooltip."
+	}
+}

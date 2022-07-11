@@ -1,0 +1,33 @@
+Cinn'r eyes applet for Cinnamon
+@ Drugwash, 2022.06.17
+Adapted from the Gnome extension Glasa by Markus Pawellek AKA lyrahgames
+
+v0.3.0.1
+- fixed a cairo bug littering the xsession-errors log
+
+v0.3.0.0
+- refactored the Settings window
+- added option to show workspace name in tooltip (only when workspace switching is enabled)
+- added a 'panic button' that resets all drawing (icon) values to default
+
+v0.2.0.2
+- attempted fix at wrong spooky mode behavior in panels other than top-sided
+
+v0.2.0.1
+- fixed accidentally duplicated timer name
+
+v0.2.0.0
+- added hardcoded limits for icon size
+- added ability to show Expo and Overview (click / Ctrl+click)
+- added ability to switch workplaces (Ctrl + mouse scroll)
+- added tooltip info when changing icon size or switching workspaces
+- added 'spooky' mode
+
+v0.1.0.0 - initial release for Cinnamon
+- moved some constants to settings for a flexible configuration
+- fixed a slight out of bounds issue at certain icon sizes
+- colorized the eyes
+- added ability to change iris color, icon/image size, and other aspects of the graphics
+- added ability to stop/start eye movement (doesn't quite work correctly)
+- changed tooltip message
+

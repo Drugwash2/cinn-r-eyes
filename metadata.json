@@ -1,0 +1,12 @@
+{
+  "uuid": "cinn-r-eyes@drugwash",
+  "name": "Cinn'r eyes",
+  "version": "0.3.0.1",
+  "author": "Drugwash",
+  "description": "Eyes following the mouse pointer",
+  "comments": "Adaptation of Gnome extension Glasa",
+  "website": "https://2wx2l.wordpress.com",
+  "contributors": "original author: lyrahgames",
+  "max-instances": "-1",
+  "last-edited": 1657488372
+}
