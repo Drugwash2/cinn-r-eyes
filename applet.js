@@ -9,9 +9,9 @@ const Settings = imports.ui.settings;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Lang = imports.lang;
-const Gdk = imports.gi.Gdk;					// for cursor shake
-const Main = imports.ui.main;				// for workspace name
-const Util = imports.misc.util;				// for the timeout
+const Gdk = imports.gi.Gdk;				// for cursor shake
+const Main = imports.ui.main;			// for workspace name
+const Util = imports.misc.util;			// for the timeout
 const Ext = imports.ui.extension;		// for path and icon theme
 
 // translation-related
@@ -49,6 +49,7 @@ SinnerEyes.prototype = {
 		this._wsInfo();
 		this.shake = this.timeout = null;
 		this.color0 = new Clutter.Color({red: 255, green: 255, blue:240, alpha: 255}); // Clutter.Color.new(r, g, b, a);
+		this.color3 = new Clutter.Color({red: 0, green: 0, blue:0, alpha: 255}); // black
 
 		this.settings.bind("eyeline-width", "eyelineW", this._rebuild, null);
 		this.settings.bind("relief-factor", "reliefF", this._rebuild, null);
@@ -66,7 +67,10 @@ SinnerEyes.prototype = {
 		this.settings.bind("ws-tip", "wsTip", this.setTip, null);
 
 //		this.<element/widget>.connect('<signal-name>', Lang.bind(this, this.<functionName>));
-
+		global.screen.connect('notify::n-workspaces', Lang.bind(this, this._defTT));
+		global.screen.connect('workareas-changed', Lang.bind(this, this._defTT));
+		global.window_manager.connect('switch-workspace', this._defTT.bind(this));
+		
 		this.setTip(this.wsTip);
 		this.createIcon(null);
 		this.toggle();
@@ -165,7 +169,7 @@ SinnerEyes.prototype = {
 		if (this.spooky) {
 			cr.scale(Math.cos(factor)/1.2, 1/1.4);
 			cr.arc(0, 0, eye_radius * this.irisSz/1.6, 0, 2 * Math.PI);
-			Clutter.cairo_set_source_color(cr, color1);
+			Clutter.cairo_set_source_color(cr, this.color3);
 			cr.fill();
 		}
 		cr.restore();
@@ -204,7 +208,7 @@ SinnerEyes.prototype = {
 		if (this.spooky) {
 			cr.scale(Math.cos(factor)/1.2, 1/1.4);
 			cr.arc(0, 0, eye_radius * this.irisSz/1.6, 0, 2 * Math.PI);
-			Clutter.cairo_set_source_color(cr, color1);
+			Clutter.cairo_set_source_color(cr, this.color3);
 			cr.fill();
 		}
 		cr.restore();
@@ -269,16 +273,18 @@ SinnerEyes.prototype = {
 // for unfortunate users we use hardcoded limits: 8px (10-2) min, panel_height-2 max.
 // We use [val]-2 because drawing area is 2px larger than actual image.
 			try {
-				this.iconSz = direction == DOWN ? ++this.iconSz :
-					direction == UP ? --this.iconSz : this.iconSz;
+				sz = direction == DOWN ? this.iconSz+1 :
+					direction == UP ? this.iconSz-1 : this.iconSz;
 				[iMin, iMax] = this.settings.getRange("icon-size");
-				let inRange = this.settings.rangeCheck("icon-size", this.iconSz);
-				if (sz != this.iconSz && inRange) this._rebuild();
+				let inRange = this.settings.rangeCheck("icon-size", sz);
+				if (sz != this.iconSz && inRange) {this.iconSz = sz; this._rebuild();}
+				else return;
 			} catch(e) {
 				iMin = 10; iMax = this.height - 2;
 				if (direction == DOWN && this.iconSz < iMax) this.iconSz++;
 				else if (direction == UP && this.iconSz > iMin) this.iconSz--;
 				if (sz != this.iconSz) this._rebuild();
+				else return;
 			}
 			TTTXT = _("Icon size") + " <b>" + this.iconSz.toString() +
 				"</b> px.\n" + _("Min") + ": <b>" + iMin.toString() +
@@ -334,11 +340,11 @@ SinnerEyes.prototype = {
 		this._applet_tooltip._tooltip.clutter_text.set_markup(txt);
 	},
 
-// default methods
 	onHover: function(actor, event) {
 // do something when icon is hovered
 	},
-
+	
+// default methods
 	on_applet_clicked: function(event) {
 //		let mod1 = event.get_state() & 1;	// test for <Shift> down
 		let mod2 = event.get_state() & 4;	// test for <Ctrl> down
