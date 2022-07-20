@@ -2,6 +2,10 @@ Cinn'r eyes applet for Cinnamon
 @ Drugwash, 2022.06.17
 Adapted from the Gnome extension Glasa by Markus Pawellek AKA lyrahgames
 
+v0.3.0.2
+- fixed tooltip not displaying correct workspace after being switched by other means
+- fixed icon size calculation bug with custom getRange() & rangeCheck() functions
+
 v0.3.0.1
 - fixed a cairo bug littering the xsession-errors log
 
