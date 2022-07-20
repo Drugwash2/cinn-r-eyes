@@ -1,12 +1,12 @@
 {
   "uuid": "cinn-r-eyes@drugwash",
   "name": "Cinn'r eyes",
-  "version": "0.3.0.1",
+  "version": "0.3.0.2",
   "author": "Drugwash",
   "description": "Eyes following the mouse pointer",
-  "comments": "Adaptation of Gnome extension Glasa",
+  "comments": "Adaptation of Gnome extension Glasa.\nCan display Expo or Overview on click/Ctrl+click.\nCan switch workspaces on Ctrl+wheel_scroll",
   "website": "https://2wx2l.wordpress.com",
   "contributors": "original author: lyrahgames",
   "max-instances": "-1",
-  "last-edited": 1657488372
+  "last-edited": 1658300205
 }
